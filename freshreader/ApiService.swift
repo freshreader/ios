@@ -17,12 +17,14 @@ struct SavedItem: Decodable, Identifiable, Hashable, Equatable {
 
 class ApiService {
     func getSavedItemsForAccount(accountNumber: String, successHandler: @escaping ([SavedItem]) -> ()) {
-        let accountNumber = "9791664447554212"        
+        let accountNumber = "7873191227987914"
         
-        guard let url = URL(string: "http://localhost:3000/api/v1/articles") else { return }
+        // guard let url = URL(string: "http://freshreader.app/api/v1/users/\(accountNumber)") else { return }
         
-        let apiAuthToken = "7333cc0b79fb2060b875ac8e458b123f3268d29efe2dacb2abee5cf31efccd7d"
+        guard let url = URL(string: "http://freshreader.app/api/v1/articles") else { return }
         
+        let apiAuthToken = "47a9c74bdc53648f88d9ea80c6f0ef2554f2a261d19c3cab28820472c43bfa0b"
+
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         

@@ -51,7 +51,7 @@ struct MasterView: View {
                 HStack() {
                     VStack(alignment: .leading) {
                         Text("\(savedItem.title)")
-                        Text("\(savedItem.url)")
+                        Text("\(savedItem.url.host!)")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
