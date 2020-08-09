@@ -8,5 +8,7 @@ Work in progress. Currently looks like this:
 ## To do (pull requests welcome!)
 
 - [x] Get saved items from API
-- [ ] Log in screen (to save account number)
-- [ ] Slide to mark item as read
+- [ ] Add login screen (to save account number)
+- [ ] Implement "slide to mark item as read"
+- [ ] Handle errors
+- [ ] Test ApiService and UI behavior
