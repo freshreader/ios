@@ -8,64 +8,62 @@
 
 import SwiftUI
 
-private let dateFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .medium
-    dateFormatter.timeStyle = .medium
-    return dateFormatter
-}()
+// DONE create a method to get the list of saved items
+// have a definition of how a list item is defined (JSON parse to SavedItem object)
+// bind the list of saved items to the SwiftUI master view
 
 struct ContentView: View {
-    @State private var dates = [Date]()
-
+    @State private var savedItems = [SavedItem]()
+    
     var body: some View {
         NavigationView {
-            MasterView(dates: $dates)
-                .navigationBarTitle(Text("Master"))
+            MasterView(savedItems: $savedItems)
+                .navigationBarTitle(Text("Reading list"))
                 .navigationBarItems(
-                    leading: EditButton(),
-                    trailing: Button(
-                        action: {
-                            withAnimation { self.dates.insert(Date(), at: 0) }
-                        }
-                    ) {
-                        Image(systemName: "plus")
-                    }
+                    leading: EditButton()
+                    // trailing: Button(
+                    //     action: {
+                    //         withAnimation { self.savedItems.insert(Date(), at: 0) }
+                    //     }
+                    // ) {
+                    //     Image(systemName: "plus")
+                    // }
                 )
-            DetailView()
         }.navigationViewStyle(DoubleColumnNavigationViewStyle())
     }
 }
 
 struct MasterView: View {
-    @Binding var dates: [Date]
+    @Binding var savedItems: [SavedItem]
+    
+    func loadData() {
+        let apiService = ApiService()
+        apiService.getSavedItemsForAccount(accountNumber: "7990224041780160", successHandler: { (listOfSavedItems) -> Void in
+            DispatchQueue.main.async {
+                self.savedItems = listOfSavedItems
+            }
+        })
+    }
 
     var body: some View {
         List {
-            ForEach(dates, id: \.self) { date in
-                NavigationLink(
-                    destination: DetailView(selectedDate: date)
-                ) {
-                    Text("\(date, formatter: dateFormatter)")
+            ForEach(savedItems, id: \.self) { savedItem in
+                HStack() {
+                    VStack(alignment: .leading) {
+                        Text("\(savedItem.title)")
+                        Text("\(savedItem.url)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }.onTapGesture {
+                    if let url = URL(string: savedItem.url.absoluteString) {
+                        UIApplication.shared.open(url)
+                    }
                 }
             }.onDelete { indices in
-                indices.forEach { self.dates.remove(at: $0) }
+                indices.forEach { self.savedItems.remove(at: $0) }
             }
-        }
-    }
-}
-
-struct DetailView: View {
-    var selectedDate: Date?
-
-    var body: some View {
-        Group {
-            if selectedDate != nil {
-                Text("\(selectedDate!, formatter: dateFormatter)")
-            } else {
-                Text("Detail view content goes here")
-            }
-        }.navigationBarTitle(Text("Detail"))
+        }.onAppear(perform: loadData)
     }
 }
 

@@ -15,6 +15,7 @@
 		188A3E4124E02D89004858F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188A3E3F24E02D89004858F4 /* LaunchScreen.storyboard */; };
 		188A3E4C24E02D89004858F4 /* freshreaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A3E4B24E02D89004858F4 /* freshreaderTests.swift */; };
 		188A3E5724E02D89004858F4 /* freshreaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A3E5624E02D89004858F4 /* freshreaderUITests.swift */; };
+		188A3E6524E03423004858F4 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A3E6424E03423004858F4 /* ApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		188A3E5224E02D89004858F4 /* freshreaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = freshreaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		188A3E5624E02D89004858F4 /* freshreaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = freshreaderUITests.swift; sourceTree = "<group>"; };
 		188A3E5824E02D89004858F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		188A3E6424E03423004858F4 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				188A3E3F24E02D89004858F4 /* LaunchScreen.storyboard */,
 				188A3E4224E02D89004858F4 /* Info.plist */,
 				188A3E3C24E02D89004858F4 /* Preview Content */,
+				188A3E6424E03423004858F4 /* ApiService.swift */,
 			);
 			path = freshreader;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			files = (
 				188A3E3524E02D88004858F4 /* AppDelegate.swift in Sources */,
 				188A3E3724E02D88004858F4 /* SceneDelegate.swift in Sources */,
+				188A3E6524E03423004858F4 /* ApiService.swift in Sources */,
 				188A3E3924E02D88004858F4 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
