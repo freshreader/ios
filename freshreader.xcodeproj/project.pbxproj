@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1878E18924FACFE4000357D4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878E18824FACFE4000357D4 /* LoginView.swift */; };
+		1878E18C24FAD704000357D4 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1878E18B24FAD704000357D4 /* KeychainSwift */; };
+		1878E18E24FADAEA000357D4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878E18D24FADAEA000357D4 /* MainView.swift */; };
 		188A3E3524E02D88004858F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A3E3424E02D88004858F4 /* AppDelegate.swift */; };
 		188A3E3724E02D88004858F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A3E3624E02D88004858F4 /* SceneDelegate.swift */; };
 		188A3E3924E02D88004858F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188A3E3824E02D88004858F4 /* ContentView.swift */; };
@@ -36,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1878E18824FACFE4000357D4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1878E18D24FADAEA000357D4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		188A3E3124E02D88004858F4 /* freshreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = freshreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		188A3E3424E02D88004858F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		188A3E3624E02D88004858F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1878E18C24FAD704000357D4 /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +115,8 @@
 				188A3E4224E02D89004858F4 /* Info.plist */,
 				188A3E3C24E02D89004858F4 /* Preview Content */,
 				188A3E6424E03423004858F4 /* ApiService.swift */,
+				1878E18824FACFE4000357D4 /* LoginView.swift */,
+				1878E18D24FADAEA000357D4 /* MainView.swift */,
 			);
 			path = freshreader;
 			sourceTree = "<group>";
@@ -155,6 +163,9 @@
 			dependencies = (
 			);
 			name = freshreader;
+			packageProductDependencies = (
+				1878E18B24FAD704000357D4 /* KeychainSwift */,
+			);
 			productName = freshreader;
 			productReference = 188A3E3124E02D88004858F4 /* freshreader.app */;
 			productType = "com.apple.product-type.application";
@@ -227,6 +238,9 @@
 				Base,
 			);
 			mainGroup = 188A3E2824E02D88004858F4;
+			packageReferences = (
+				1878E18A24FAD704000357D4 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = 188A3E3224E02D88004858F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -271,8 +285,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				188A3E3524E02D88004858F4 /* AppDelegate.swift in Sources */,
+				1878E18E24FADAEA000357D4 /* MainView.swift in Sources */,
 				188A3E3724E02D88004858F4 /* SceneDelegate.swift in Sources */,
 				188A3E6524E03423004858F4 /* ApiService.swift in Sources */,
+				1878E18924FACFE4000357D4 /* LoginView.swift in Sources */,
 				188A3E3924E02D88004858F4 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1878E18A24FAD704000357D4 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1878E18B24FAD704000357D4 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1878E18A24FAD704000357D4 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 188A3E2924E02D88004858F4 /* Project object */;
 }

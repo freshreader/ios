@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import KeychainSwift
 
 struct SavedItem: Decodable, Identifiable, Hashable, Equatable {
     let id: Int
@@ -16,19 +17,22 @@ struct SavedItem: Decodable, Identifiable, Hashable, Equatable {
 }
 
 class ApiService {
-    func getSavedItemsForAccount(accountNumber: String, successHandler: @escaping ([SavedItem]) -> ()) {
-        let accountNumber = "7873191227987914"
+    func getSavedItemsForAccount(successHandler: @escaping ([SavedItem]) -> ()) {
+        // let accountNumber = "9705295212295412"
+
+        let keychain = KeychainSwift()
+        let accountNumber = keychain.get("accountNumber")
         
         // guard let url = URL(string: "http://freshreader.app/api/v1/users/\(accountNumber)") else { return }
         
         guard let url = URL(string: "http://freshreader.app/api/v1/articles") else { return }
         
-        let apiAuthToken = "47a9c74bdc53648f88d9ea80c6f0ef2554f2a261d19c3cab28820472c43bfa0b"
+        let apiAuthToken = "16954968ad84204037fabeb586e58f7fa634d2b4cb88e32615fe58b89e567a11"
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        let test = "Token token=\"\(apiAuthToken)\", account_number=\"\(accountNumber)\""
+        let test = "Token token=\"\(apiAuthToken)\", account_number=\"\(accountNumber ?? "bleh")\""
         request.setValue(test, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
@@ -42,6 +46,43 @@ class ApiService {
             
             let savedItems: [SavedItem] = try! JSONDecoder().decode(Array<SavedItem>.self, from: jsonData)
             successHandler(savedItems)
+        }
+        task.resume()
+    }
+    
+    func deleteSavedItem(savedItemId: Int, successHandler: @escaping (Bool) -> ()) {
+        let keychain = KeychainSwift()
+        let accountNumber = keychain.get("accountNumber")
+        
+        guard let url = URL(string: "http://freshreader.app/api/v1/articles/\(savedItemId)") else { return }
+        
+        let apiAuthToken = "16954968ad84204037fabeb586e58f7fa634d2b4cb88e32615fe58b89e567a11"
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        let test = "Token token=\"\(apiAuthToken)\", account_number=\"\(accountNumber ?? "bleh")\""
+        request.setValue(test, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+
+        let task = URLSession.shared.dataTask(with: request) {(jsonData, response, error) in
+            
+            if let _error = error {
+                successHandler(false);
+                return
+            }
+            
+            guard let _response = response else {
+                successHandler(false);
+                return
+            }
+            
+            guard let jsonData = jsonData else {
+                successHandler(false);
+                return
+            }
+            
+            successHandler(true);
         }
 
         task.resume()

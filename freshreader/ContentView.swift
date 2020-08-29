@@ -36,9 +36,10 @@ struct ContentView: View {
 struct MasterView: View {
     @Binding var savedItems: [SavedItem]
     
+    private let apiService = ApiService()
+    
     func loadData() {
-        let apiService = ApiService()
-        apiService.getSavedItemsForAccount(accountNumber: "7990224041780160", successHandler: { (listOfSavedItems) -> Void in
+        apiService.getSavedItemsForAccount(successHandler: { (listOfSavedItems) -> Void in
             DispatchQueue.main.async {
                 self.savedItems = listOfSavedItems
             }
@@ -61,7 +62,19 @@ struct MasterView: View {
                     }
                 }
             }.onDelete { indices in
-                indices.forEach { self.savedItems.remove(at: $0) }
+                indices.forEach {
+                    let index = $0
+                    let savedItemId = self.savedItems[$0].id
+                    
+                    self.apiService.deleteSavedItem(savedItemId: savedItemId) { (deleteSucceeded) in
+                        if deleteSucceeded {
+                            print("deleted!")
+                            self.savedItems.remove(at: index)
+                        } else {
+                            print("unable to remove")
+                        }
+                    }
+                }
             }
         }.onAppear(perform: loadData)
     }
